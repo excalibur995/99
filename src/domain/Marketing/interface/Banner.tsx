@@ -6,7 +6,7 @@ const Banner = () => {
       <Image
         src="/images/Banner.png"
         alt="Banner Image"
-        className="hidden lg:flex w-full aspect-video max-h-[420px]"
+        className="hidden lg:flex w-full aspect-video max-h-[520px]"
         nextImageConfig={{ className: "object-fill" }}
       />
       <Image

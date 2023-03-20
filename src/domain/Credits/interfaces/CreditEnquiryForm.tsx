@@ -3,6 +3,7 @@ import Spinner from "@/components/common/Spinner";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import * as yup from "yup";
 import { sendToZapier } from "../services";
 
@@ -45,8 +46,16 @@ const CreditEnquiryForm = (props: CreditEnquiryForm) => {
   const { mutate, isLoading } = useMutation(sendToZapier, {
     onSuccess(data, variables, context) {
       props.onSuccessSendData?.();
+      toast.success("Permintaan Berhasil", {
+        autoClose: 500,
+        position: "bottom-center",
+      });
     },
-    onError(error, variables, context) {},
+    onError(error, variables, context) {
+      toast.error("Permintaan gagal, silahkan coba lagi", {
+        autoClose: 500,
+      });
+    },
   });
 
   const onSubmit = (data: FormData) => mutate(data);

@@ -66,7 +66,10 @@ const CreditCard = (props: Attributes) => {
           <CreditRatesList
             bankRates={props.bankRates}
             onClose={toggleRates}
-            onToggleEnquiry={toggleEnquiry}
+            onToggleEnquiry={() => {
+              toggleRates();
+              toggleEnquiry();
+            }}
           />
         )}
       </Modal>
