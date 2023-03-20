@@ -1,8 +1,12 @@
 import Image from "@/components/common/Image";
+import Modal from "@/components/common/Modal";
 import { hardcodedCreditLimit } from "@/lib/constant";
+import useToggle from "@/lib/hooks/useToggle";
 import { Attributes } from "../model";
+import CreditCardInfoModal from "./CreditCardInfoModal";
 
 const CreditCard = (props: Attributes) => {
+  const [ratesVisible, toggleRates] = useToggle();
   return (
     <div className="border border-[#E7E8EB rounded-xl overflow-hidden">
       <div className="flex flex-col gap-3 ] p-3 ">
@@ -38,14 +42,31 @@ const CreditCard = (props: Attributes) => {
       </div>
       <section className="bg-[#F3F7FF] ] p-3 ">
         <div className="flex flex-row justify-between items-center">
-          <p className="text-[#2951A3] font-bold">
+          <button onClick={toggleRates} className="text-[#2951A3] font-bold">
             Lihat {props.bankRates.length} Program
-          </p>
+          </button>
           <button className="bg-[#2951A3] text-white py-2 px-4 rounded-lg active:opacity-70 font-semibold">
             Info Lebih Lanjut
           </button>
         </div>
       </section>
+      <Modal
+        open={ratesVisible}
+        onClose={toggleRates}
+        title="Program Multiguna Bank BTN"
+      >
+        <section className="mt-4 overflow-auto h-[calc(100vh_-_49px_-_36px)] md:h-fit">
+          {props.bankRates.map(CreditCardInfoModal)}
+          <section className="grid grid-cols-2 gap-4 mt-4">
+            <button onClick={toggleRates} className="text-[#2951A3] font-bold">
+              Kembali
+            </button>
+            <button className="bg-[#2951A3] text-white py-2 px-4 rounded-lg active:opacity-70 font-semibold">
+              Info Lebih Lanjut
+            </button>
+          </section>
+        </section>
+      </Modal>
     </div>
   );
 };

@@ -3,7 +3,7 @@ import useCreditFetchHooks from "../hooks/useCreditHooks";
 import CreditCard from "./CreditCard";
 
 const CreditList = () => {
-  const { data, isFetching, isError } = useCreditFetchHooks();
+  const { data, isFetching } = useCreditFetchHooks();
   const [currentPage, setCurrentPage] = useState(1);
 
   const isAvailable = useMemo(() => {
@@ -45,6 +45,7 @@ const CreditList = () => {
           </div>
         ))}
       </div>
+
       {isAvailable && (
         <section className="mt-6 text-center w-full">
           <button
