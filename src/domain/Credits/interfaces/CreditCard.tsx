@@ -4,9 +4,11 @@ import { hardcodedCreditLimit } from "@/lib/constant";
 import useToggle from "@/lib/hooks/useToggle";
 import { Attributes } from "../model";
 import CreditCardInfoModal from "./CreditCardInfoModal";
+import CreditEnquiryForm from "./CreditEnquiryForm";
 
 const CreditCard = (props: Attributes) => {
   const [ratesVisible, toggleRates] = useToggle();
+  const [enquiryVisible, toggleEnquiry] = useToggle();
   return (
     <div className="border border-[#E7E8EB rounded-xl overflow-hidden">
       <div className="flex flex-col gap-3 ] p-3 ">
@@ -45,7 +47,10 @@ const CreditCard = (props: Attributes) => {
           <button onClick={toggleRates} className="text-[#2951A3] font-bold">
             Lihat {props.bankRates.length} Program
           </button>
-          <button className="bg-[#2951A3] text-white py-2 px-4 rounded-lg active:opacity-70 font-semibold">
+          <button
+            onClick={toggleEnquiry}
+            className="bg-[#2951A3] text-white py-2 px-4 rounded-lg active:opacity-70 font-semibold"
+          >
             Info Lebih Lanjut
           </button>
         </div>
@@ -61,11 +66,21 @@ const CreditCard = (props: Attributes) => {
             <button onClick={toggleRates} className="text-[#2951A3] font-bold">
               Kembali
             </button>
-            <button className="bg-[#2951A3] text-white py-2 px-4 rounded-lg active:opacity-70 font-semibold">
+            <button
+              onClick={toggleEnquiry}
+              className="bg-[#2951A3] text-white py-2 px-4 rounded-lg active:opacity-70 font-semibold"
+            >
               Info Lebih Lanjut
             </button>
           </section>
         </section>
+      </Modal>
+      <Modal
+        open={enquiryVisible}
+        onClose={toggleEnquiry}
+        title="Program Multiguna Bank BTN"
+      >
+        <CreditEnquiryForm />
       </Modal>
     </div>
   );
