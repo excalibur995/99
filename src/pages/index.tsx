@@ -2,6 +2,7 @@ import Field from "@/components/common/Field";
 import CreditList from "@/domain/Credits/interfaces/CreditList";
 import IntentionList from "@/domain/Intention/interface/IntentionList";
 import Banner from "@/domain/Marketing/interface/Banner";
+import { Footer } from "@/domain/Marketing/interface/Footer";
 import { intentionList } from "@/lib/constant";
 
 export default function Home() {
@@ -25,7 +26,11 @@ export default function Home() {
             <CreditList />
           </section>
         </Field>
+        <div className="border-t p-5 text-[#A5ADB5] text-xs">
+          Beranda / KPR / Multiguna
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
