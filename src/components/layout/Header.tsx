@@ -15,7 +15,7 @@ const Header = () => {
     <header className="fixed top-0 z-50 w-full bg-white ">
       <div className="max-w-[1440px] mx-auto flex items-center h-14 justify-between gap-4 px-4 lg:px-10">
         <div className="flex items-center space-x-10 ">
-          <Image src="/rumah123.svg" alt="logo" className="w-[205px] h-6" />
+          <Image src="/Rumah123.svg" alt="logo" className="w-[205px] h-6" />
           <nav className="lg:flex flex-row gap-2 xl:gap-4 hidden">
             {navigation.map((navi) => (
               <p
