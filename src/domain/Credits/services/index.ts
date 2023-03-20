@@ -34,11 +34,3 @@ export async function sendToZapier(data: FormData) {
     throw new Error((error as Error).message);
   }
 }
-
-export function paginate(
-  array: any[],
-  page_size: number = 6,
-  page_number: number = 1
-) {
-  return array.slice((page_number - 1) * page_size, page_number * page_size);
-}

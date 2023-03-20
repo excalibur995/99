@@ -113,7 +113,6 @@ const CreditEnquiryForm = (props: CreditEnquiryForm) => {
         placeholder="Cari Lokasi atau area"
         {...register("location")}
       />
-      <p>{errors.location?.message}</p>
 
       <button
         type="submit"
