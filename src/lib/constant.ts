@@ -20,3 +20,10 @@ export const intentionList: { src: string; title: string }[] = [
     title: "Dana Kesehatan",
   },
 ];
+
+export const hardcodedCreditLimit = [
+  "Max. 90% dari harga properti agunan",
+  "Rp250 Juta - Rp10 Miliar",
+  "Rp100 Juta - Rp 10 Miliar",
+  "Rp250 Juta - Rp2.5 Miliar",
+];
