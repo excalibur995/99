@@ -2,9 +2,11 @@ import Image from "@/components/common/Image";
 import Modal from "@/components/common/Modal";
 import { hardcodedCreditLimit } from "@/lib/constant";
 import useToggle from "@/lib/hooks/useToggle";
+import dynamic from "next/dynamic";
 import { Attributes } from "../model";
-import CreditCardInfoModal from "./CreditCardInfoModal";
-import CreditEnquiryForm from "./CreditEnquiryForm";
+
+const CreditRatesList = dynamic(() => import("./CreditRatesList"));
+const CreditEnquiryForm = dynamic(() => import("./CreditEnquiryForm"));
 
 const CreditCard = (props: Attributes) => {
   const [ratesVisible, toggleRates] = useToggle();
@@ -60,27 +62,22 @@ const CreditCard = (props: Attributes) => {
         onClose={toggleRates}
         title="Program Multiguna Bank BTN"
       >
-        <section className="mt-4 overflow-auto h-[calc(100vh_-_49px_-_36px)] md:h-fit">
-          {props.bankRates.map(CreditCardInfoModal)}
-          <section className="grid grid-cols-2 gap-4 mt-4">
-            <button onClick={toggleRates} className="text-[#2951A3] font-bold">
-              Kembali
-            </button>
-            <button
-              onClick={toggleEnquiry}
-              className="bg-[#2951A3] text-white py-2 px-4 rounded-lg active:opacity-70 font-semibold"
-            >
-              Info Lebih Lanjut
-            </button>
-          </section>
-        </section>
+        {ratesVisible && (
+          <CreditRatesList
+            bankRates={props.bankRates}
+            onClose={toggleRates}
+            onToggleEnquiry={toggleEnquiry}
+          />
+        )}
       </Modal>
       <Modal
         open={enquiryVisible}
         onClose={toggleEnquiry}
         title="Program Multiguna Bank BTN"
       >
-        <CreditEnquiryForm />
+        {enquiryVisible && (
+          <CreditEnquiryForm onSuccessSendData={toggleEnquiry} />
+        )}
       </Modal>
     </div>
   );

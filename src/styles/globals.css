@@ -24,3 +24,10 @@ input::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield;
 }
+
+button:disabled {
+  @apply bg-slate-400 cursor-not-allowed;
+}
+button:disabled:active {
+  @apply opacity-100;
+}

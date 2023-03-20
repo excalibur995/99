@@ -1,10 +1,13 @@
 import Input from "@/components/common/Input";
+import Spinner from "@/components/common/Spinner";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import { sendToZapier } from "../services";
 
 const phoneRegex = new RegExp(
-  /(\()?(\+62|62|0)(\d{2,3})?\)?[ .-]?\d{2,4}[ .-]?\d{2,4}[ .-]?\d{2,4}/g
+  /(\()?(\d{2,3})?\)?[ .-]?\d{2,4}[ .-]?\d{2,4}[ .-]?\d{2,4}/g
 );
 
 const schema = yup
@@ -26,7 +29,11 @@ const schema = yup
 
 type FormData = yup.InferType<typeof schema>;
 
-const CreditEnquiryForm = () => {
+interface CreditEnquiryForm {
+  onSuccessSendData?: () => void;
+}
+
+const CreditEnquiryForm = (props: CreditEnquiryForm) => {
   const {
     register,
     handleSubmit,
@@ -35,7 +42,14 @@ const CreditEnquiryForm = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormData) => console.log(data);
+  const { mutate, isLoading } = useMutation(sendToZapier, {
+    onSuccess(data, variables, context) {
+      props.onSuccessSendData?.();
+    },
+    onError(error, variables, context) {},
+  });
+
+  const onSubmit = (data: FormData) => mutate(data);
 
   return (
     <form
@@ -94,8 +108,10 @@ const CreditEnquiryForm = () => {
 
       <button
         type="submit"
-        className="bg-[#2951A3] text-white py-2 px-4 rounded-lg active:opacity-70 font-semibold"
+        disabled={isLoading}
+        className="flex flex-row items-center justify-center bg-[#2951A3] text-white py-2 px-4 rounded-lg active:opacity-70 font-semibold"
       >
+        {isLoading && <Spinner />}
         Kirim
       </button>
     </form>
